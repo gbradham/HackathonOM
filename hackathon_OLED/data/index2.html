@@ -1,0 +1,487 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>DANGER RANGER</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="icon" href="data:,">
+
+<body>
+  <style>
+    html {
+      font-family: Arial;
+      display: inline-block;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    body {
+      margin: 0;
+      background-color: rgb(19, 19, 19);
+    }
+
+    .topnav {
+      overflow: hidden;
+      background-color: #0a0a0ab8;
+      color: white;
+      font-size: 1.9rem;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.5);
+      text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.76);
+      /* Adjust values as needed */
+    }
+
+
+    .content {
+      padding: 20px;
+    }
+
+    .cards {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .cards-thin {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: #1b1b1bb1;
+      box-shadow: 2px 2px 12px 1px rgba(0, 0, 0, 0.5);
+      margin: 10px;
+      padding: 20px;
+      width: 30%;
+      /* Equal width for each card */
+      height: 200px;
+      /* Set height as desired */
+      box-sizing: border-box;
+      border-radius: 15px;
+      /* Rounded corners */
+      position: relative;
+      /* Added */
+    }
+
+    .reading {
+      font-size: 2.6rem;
+    }
+
+    .timestamp {
+      color: #fbffff;
+      font-size: 1rem;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    }
+
+    .threatlvl {
+      color: #c9c9c9;
+      font-size: 1rem;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    
+    .card-thin {
+      background-color: #1b1b1bb1;
+      box-shadow: 2px 2px 12px 1px rgba(0, 0, 0, 0.5);
+      margin: 10px;
+      padding: 0px;
+      width: 30%;
+      /* Equal width for each card */
+      height: 50px;
+      /* Set height as desired */
+      box-sizing: border-box;
+      border-radius: 15px;
+      /* Rounded corners */
+      position: relative;
+      /* Added */
+    }
+
+    .temperature {
+      color: #b42741;
+      text-shadow: 1px 1px 2px #b4274180;
+    }
+
+    .humidity {
+      color: #57c4c0;
+      text-shadow: 1px 1px 2px #57c4c080;
+    }
+
+    .pressure {
+      color: #3b7cff;
+      text-shadow: 1px 1px 2px #3b7cff80;
+    }
+
+    .temperature {
+      color: #b42741;
+      text-shadow: 1px 1px 2px #b4274180;
+    }
+
+    .humidity {
+      color: #57c4c0;
+      text-shadow: 1px 1px 2px #57c4c080;
+    }
+
+    .pressure {
+      color: #3b7cff;
+      text-shadow: 1px 1px 2px #3b7cff80;
+    }
+
+    .setrange {
+      align-content: center;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .card-side {
+        visibility: collapse;
+    }
+    
+    .card-right {
+      position: relative; /* Add this line */
+      bottom: 80px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .cards {
+        flex-direction: column;
+        /* Change flex direction to column for smaller screens */
+        align-items: center;
+        /* Center align items */
+      }
+
+      .card {
+        width: 90%;
+        /* Full width for each card on smaller screens */
+      }
+
+      .cards-thin {
+        visibility: collapse;
+        height: 0px;
+      }
+
+      .card-thin {
+        visibility: collapse;
+        height: 0px;
+      }
+      
+      .card-side {
+        visibility: visible;
+        background-color: #1b1b1bb1;
+        box-shadow: 2px 2px 12px 1px rgba(0, 0, 0, 0.5);
+        margin: 0px;
+        padding: 0px;
+        width: 20%;
+        /* Equal width for each card */
+        height: 50px;
+        /* Set height as desired */
+        box-sizing: border-box;
+        border-radius: 15px;
+        /* Rounded corners */
+        position: relative;
+        /* Added */
+        bottom: 20px;
+      }
+
+      .card-right {
+        position: absolute;
+        top: 4px; /* Adjust this value as needed */
+        width: 90%;
+      }
+      .setrange-side {
+       position: relative;
+       top: 6px;
+      }
+    }
+
+    .danger {
+      text-align: center;
+      color: #ffffff;
+      text-shadow: 1px 1px 2px #ffffff80;
+    }
+
+    /* Added styles for the chart canvas */
+    .canvas-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+    .hide-btn {
+      text-decoration: none;
+      color: inherit;
+    }
+    .Form {
+      width: 20%;
+      margin: 2px;
+      padding: 2px;
+      color: rgb(255, 255, 255);
+    }
+    input[type=text] {
+      background-color: rgb(31, 31, 31);
+      background-image: url('searchicon.png');
+      background-position: 10px 10px;
+       background-repeat: no-repeat;
+      padding-left: 40px;
+    }
+  </style>
+  </head>
+
+  <body>
+    <div class="topnav">
+      <h1>DANGER RANGER - CURRENT LOCATION</h1>
+    </div>
+    <div class="content">
+      <div class="danger">
+        <H1 class="threat">
+          THREAT LEVEL: <span id="tL"></span>
+        </H1>
+      </div>
+      <div class="cards-thin">
+        <!-- Top row -->
+        <div class="card-thin temperature">
+          <a class="hide-btn" href="#" id="btn" onclick="openform()"><p class="setrange">SET RANGE</p></a>
+        </div>
+        <div class="card-thin humidity">
+          <a class="hide-btn" href="#" id="btn" onclick="openform()"><p class="setrange">SET RANGE</p></a>
+        </div>
+        <div class="card-thin pressure">
+          <a class="hide-btn" href="#" id="btn" onclick="openform()"><p class="setrange">SET RANGE</p></a>
+        </div>
+      </div>
+      <div class="cards">
+        <!-- Mid row -->
+        <div class="card">
+          <div class="card-side">
+            <h1 class="setrange-side">SR</h1>
+          </div>
+          <div class="card-right temperature">
+            <p class="card-title"><i class="bi bi-thermometer-half"></i> TEMPERATURE</p>
+            <p><span class="reading"><span id="t1"></span>&deg;F</span></p>
+            <p class="timestamp">Last Reading: <span id="rt1"></span></p>
+            <p class="threatlvl">Threat level - <span id="trt"></span></p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-side">
+            <h1 class="setrange-side">SR</h1>
+          </div>
+          <div class="card-right humidity">
+            <p class="card-title"><i class="bi bi-droplet-fill"></i> HUMIDITY</p>
+            <p><span class="reading"><span id="h1"></span>&percnt;</span></p>
+            <p class="timestamp">Last Reading: <span id="rh1"></span></p>
+            <p class="threatlvl">Threat level - <span id="trh"></span></p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-side">
+            <h1 class="sterange-side">SR</h1>
+          </div>
+          <div class="card-right pressure">
+            <p class="card-title"><i class="bi bi-speedometer"></i> PRESSURE</p>
+            <p><span class="reading"><span id="p2"></span>kPa</span></p>
+            <p class="timestamp">Last Reading: <span id="rp2"></span></p>
+            <p class="threatlvl">Threat level - <span id="trp"></span></p>
+          </div>
+        </div>
+      </div>
+      <div class="cards">
+        <!-- Bottom Row -->
+        <div class="card-thin temperature">
+          <div style="position: relative; width: 100%; height: 100%;">
+              <div class="canvas-container">
+                  <div>
+                      <h3>Avg: <span id="tempAvg"></span>&deg;F  </h3>
+                  </div>
+
+                  <div>
+                      <h3>Max: <span id="highTemp"></span>&deg;F  </h3>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="card-thin humidity">
+          <div class="canvas-container">
+              <div>
+                  <h3>Avg: <span id="humAvg"></span>&percnt;  </h3>
+              </div>
+              <div>
+                  <h3>Max: <span id="highHum"></span>&percnt;  </h3>
+              </div>
+          </div>
+      </div>
+      <div class="card-thin pressure">
+          <div class=" canvas-container">
+              <div>
+                  <h3>Avg: <span id="presAvg"></span>kPa  </h3>
+              </div>
+              <div>
+                  <h3>Max: <span id="highPres"></span>kPa  </h3>
+              </div>
+          </div>
+      </div>
+      <form class="Form" id="tempForm" action="/" method="GET">
+        <label for="arduinoParam">Temp Range</label>
+        <input type="text" id="arduinoParam" name="param" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param2" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param3" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param4" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param5" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param6" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param7" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param8" placeholder="Enter parameter">
+        <button type="submit">Send Request</button>
+      </form>
+      <form class="Form" id="humForm" action="/1" method="GET">
+        <label for="arduinoParam">Humidity Range</label>
+        <input type="text" id="arduinoParam" name="param" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param2" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param3" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param4" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param5" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param6" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param7" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param8" placeholder="Enter parameter">
+        <button type="submit">Send Request</button>
+      </form>
+      <form class="Form" id="pressureForm" action="/2" method="GET">
+        <label for="arduinoParam">Pressure Range</label>
+        <input type="text" id="arduinoParam" name="param" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param2" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param3" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param4" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param5" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param6" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param7" placeholder="Enter parameter">
+        <input type="text" id="arduinoParam" name="param8" placeholder="Enter parameter">
+        <button type="submit">Send Request</button>
+      </form>
+      </div>
+    </div>
+    <script>
+      var temp;
+      var humidity;
+      var pressure;
+      var threatLevelTemp;
+      var threatLevelHumi;
+      var threatLevelPressure;
+
+      var tempAvg = 0;
+      var humAvg = 0;
+      var presAvg = 0;
+      var readingsCount = 0;
+
+      var tempMax = 0;
+      var humMax = 0;
+      var presMax = 0
+
+      function getDateTime() {
+        console.log("Getting Date and Time...");
+        var currentdate = new Date();
+        return currentdate.getDate() + "/"
+          + (currentdate.getMonth() + 1) + "/"
+          + currentdate.getFullYear() + " at "
+          + currentdate.getHours() + ":"
+          + currentdate.getMinutes() + ":"
+          + currentdate.getSeconds();
+      }
+
+      if (!!window.EventSource) {
+        var source = new EventSource('/events');
+
+        source.addEventListener('open', function (e) {
+          console.log("Events Connected");
+        }, false);
+        source.addEventListener('error', function (e) {
+          if (e.target.readyState != EventSource.OPEN) {
+            console.log("Events Disconnected");
+          }
+        }, false);
+
+        source.addEventListener('message', function (e) {
+          console.log("message", e.data);
+        }, false);
+
+        source.addEventListener('new_readings', function (e) {
+          console.log("New readings received:", e.data); // Log that new readings are received
+          var obj = JSON.parse(e.data);
+          if (obj.id == 1) {
+            console.log("id 1");
+            temp = obj.temperature.toFixed(2);
+            humidity = obj.humidity.toFixed(2);
+            threatLevelTemp = obj.threatLevelTemp;
+            threatLevelHumi = obj.threatLevelHumi;
+            console.log(temp);
+            console.log(humidity);
+
+            if(temp != 32 && humidity != 0) {
+              // Update average values
+             tempAvg = (tempAvg * readingsCount + parseFloat(temp)) / (readingsCount + 1);
+              humAvg = (humAvg * readingsCount + parseFloat(humidity)) / (readingsCount + 1);
+
+              document.getElementById("tempAvg").textContent = tempAvg.toFixed(2);
+              document.getElementById("humAvg").textContent = humAvg.toFixed(2);
+              // Update maximum values
+              if (parseFloat(temp) > tempMax) {
+                  tempMax = parseFloat(temp);
+                  document.getElementById("highTemp").textContent = tempMax.toFixed(2);
+              }
+              if (parseFloat(humidity) > humMax) {
+                  humMax = parseFloat(humidity);
+                  document.getElementById("highHum").textContent = humMax.toFixed(2);
+              }
+
+              readingsCount++;
+
+            document.getElementById("trt").textContent = threatLevelTemp;
+            document.getElementById("trh").textContent = threatLevelHumi;
+            document.getElementById("t1").textContent = temp;
+            document.getElementById("h1").textContent = humidity
+            document.getElementById("rt1").textContent = getDateTime();
+            document.getElementById("rh1").textContent = getDateTime();
+            }
+          }
+          if (obj.id == 2) {
+            console.log("id 2");
+            pressure = obj.pressure.toFixed(2);
+        
+            if (pressure <= 110 && pressure >= 80) {
+              threatLevelPressure = obj.threatLevelPressure;
+              document.getElementById("trp").textContent = threatLevelPressure;
+              console.log(pressure);
+
+               // Update average value
+              presAvg = (presAvg * readingsCount + parseFloat(pressure)) / (readingsCount + 1);
+              
+              document.getElementById("presAvg").textContent = presAvg.toFixed(1);
+              // Update maximum value
+              if (parseFloat(pressure) > presMax) {
+                  presMax = parseFloat(pressure);
+                  document.getElementById("highPres").textContent = presMax.toFixed(1);
+              }
+
+              readingsCount++;
+
+              document.getElementById("p2").textContent = obj.pressure.toFixed(2);
+            document.getElementById("rp2").textContent = getDateTime();
+            }
+          }
+        }, false);
+      }
+
+    </script>
+  </body>
+
+</html>
